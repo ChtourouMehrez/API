@@ -53,7 +53,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Employee>> Create([FromBody] Qualification qualification)
+        public async Task<ActionResult<Qualification>> Create([FromBody] Qualification qualification)
         {
             try
             {

@@ -53,7 +53,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Employee>> CreateOrganigramme([FromBody] Organigramme organigramme)
+        public async Task<ActionResult<Organigramme>> CreateOrganigramme([FromBody] Organigramme organigramme)
         {
             try
             {

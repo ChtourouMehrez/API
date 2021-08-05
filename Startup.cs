@@ -39,6 +39,8 @@ namespace API
             #region **** Injection Service Repository
             services.AddScoped<IOrganigrammeRepository, OrganigrammeRepository>();
             services.AddScoped<IQualificationRepository, QualificationRepository>();
+            services.AddScoped<ITypePrimeRepository, TypePrimeRepository>();
+            services.AddScoped<ITypePaieRepository, TypePaieRepository>();
 
             #endregion
         }

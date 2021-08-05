@@ -17,9 +17,14 @@ namespace API
 
         public DbSet<Qualification>Qualifications { get; set; }
 
+        public DbSet<TypePrime> TypePrimes { get; set; }
 
 
+        public DbSet<TypePaie> TypePaies { get; set; }
 
+        public DbSet<TypeContrat> TypeContrats { get; set; }
 
+        public DbSet<HeureSupplementaire> HeureSupplementaires { get; set; }
+        
     }
 }
