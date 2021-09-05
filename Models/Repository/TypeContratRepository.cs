@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models;
 namespace API.Models.Repository
-{ 
-    public class TypeContratRepository : ITypeContratRepository 
+{
+    public class TypeContratRepository : ITypeContratRepository
     {
         private readonly AppDbContext appDbContext;
 
@@ -25,7 +25,7 @@ namespace API.Models.Repository
 
         public async Task<TypeContrat> Delete(int id)
         {
-            var result = await appDbContext.TypeContrats.FirstOrDefaultAsync(e => e.Id == id);
+            var result = await appDbContext.TypeContrats.FirstOrDefaultAsync(e => e.TypeContratId == id);
             if (result != null)
             {
 
@@ -40,7 +40,7 @@ namespace API.Models.Repository
         public async Task<TypeContrat> GetById(int Id)
         {
 
-            return await appDbContext.TypeContrats.FirstOrDefaultAsync(e => e.Id == Id);
+            return await appDbContext.TypeContrats.FirstOrDefaultAsync(e => e.TypeContratId == Id);
         }
 
         public async Task<TypeContrat> GetByCriteria(string Libelle)
@@ -57,20 +57,20 @@ namespace API.Models.Repository
         public async Task<TypeContrat> Update(TypeContrat obj)
         {
 
-            var result = await GetById(obj.Id);
+            var result = await GetById(obj.TypeContratId);
             //await appDbContext.Qualifications.Include(e => e.Departement).FirstOrDefaultAsync(e => e.QualificationId == employe.QualificationId);
             if (result != null)
             {
                 if (result != obj)
                 {
-                    result.Id = obj.Id;
+                    result.TypeContratId = obj.TypeContratId;
 
                     result.CodeTypeContrat = obj.CodeTypeContrat;
 
                     result.Libelle = obj.Libelle;
 
                     result.CompterAnciente = obj.CompterAnciente;
-                   
+
 
                     await appDbContext.SaveChangesAsync();
                     return result;
@@ -87,7 +87,7 @@ namespace API.Models.Repository
             IQueryable<TypeContrat> query = appDbContext.TypeContrats;
             if (!string.IsNullOrEmpty(name))
             {
-                
+
                 query = query.Where(e => e.Libelle.Contains(name) || e.Libelle.Contains(name));
             }
 

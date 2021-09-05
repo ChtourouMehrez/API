@@ -1,14 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models;
 namespace API.Models.Repository
-{
-#pragma warning disable CS0535 // 'QualificationRepository' n'implémente pas le membre d'interface 'IQualificationRepository.Delete(int)'
-    public class TypePrimeRepository : ITypePrimeRepository
-#pragma warning restore CS0535 // 'QualificationRepository' n'implémente pas le membre d'interface 'IQualificationRepository.Delete(int)'
+{ 
+    public class TypePrimeRepository : ITypePrimeRepository 
     {
         private readonly AppDbContext appDbContext;
 
@@ -27,7 +25,7 @@ namespace API.Models.Repository
 
         public async Task<TypePrime> Delete(int id)
         {
-            var result = await appDbContext.TypePrimes.FirstOrDefaultAsync(e => e.Id == id);
+            var result = await appDbContext.TypePrimes.FirstOrDefaultAsync(e => e.TypePrimeId == id);
             if (result != null)
             {
 
@@ -42,7 +40,7 @@ namespace API.Models.Repository
         public async Task<TypePrime> GetById(int Id)
         {
 
-            return await appDbContext.TypePrimes.FirstOrDefaultAsync(e => e.Id == Id);
+            return await appDbContext.TypePrimes.FirstOrDefaultAsync(e => e.TypePrimeId == Id);
         }
 
         public async Task<TypePrime> GetByCriteria(string Libelle)
@@ -59,13 +57,13 @@ namespace API.Models.Repository
         public async Task<TypePrime> Update(TypePrime typePrimes)
         {
 
-            var result = await GetById(typePrimes.Id);
+            var result = await GetById(typePrimes.TypePrimeId);
             //await appDbContext.Qualifications.Include(e => e.Departement).FirstOrDefaultAsync(e => e.QualificationId == employe.QualificationId);
             if (result != null)
             {
                 if (result != typePrimes)
                 {
-                    result.Id = typePrimes.Id;
+                    result.TypePrimeId = typePrimes.TypePrimeId;
 
                     result.CodePrime = typePrimes.CodePrime;
 
