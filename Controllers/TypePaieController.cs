@@ -1,20 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Models.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Models.Repository;
 using Models;
+using System;
+using System.Threading.Tasks;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TypePaiesController : ControllerBase
+    public class TypePaieController : ControllerBase
     {
-        private readonly ITypePaieRepository typePaieRepository;
+        private readonly ITypePaiesRepository typePaieRepository;
 
-        public TypePaiesController(ITypePaieRepository typePaieRepository)
+        public TypePaieController(ITypePaiesRepository typePaieRepository)
         {
 
             this.typePaieRepository = typePaieRepository;
@@ -35,7 +33,7 @@ namespace API.Controllers
 
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<TypePaie>> GetById(int id)
+        public async Task<ActionResult<TypePaies>> GetById(int id)
         {
             try
             {
@@ -52,54 +50,54 @@ namespace API.Controllers
             }
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult<TypePaie>> Create([FromBody] TypePaie typePrime)
-        //{
-        //    try
-        //    {
+        [HttpPost]
+        public async Task<ActionResult<TypePaies>> Create([FromBody] TypePaies objet)
+        {
+            try
+            {
 
-        //        if
-        //        (typePrime == null)
-        //        {
-        //            return BadRequest();
+                if
+                (objet == null)
+                {
+                    return BadRequest();
 
-        //        }
-        //        else
-        //        {
-        //            var org = await typePaieRepository.GetByCriteria(typePrime.codePaie);
-        //            if (org == null)
-        //            {
+                }
+                else
+                {
+                    var obj = await typePaieRepository.GetByCriteria(objet.CodePaie);
+                    if (obj == null)
+                    {
 
-        //                var created = await typePrimeRepository.Add(typePrime);
-        //                return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+                        var created = await typePaieRepository.Add(objet);
+                        return CreatedAtAction(nameof(GetById), new { id = created.TypePaiesId }, created);
 
-        //            }
-        //            else
-        //            {
-        //                ModelState.AddModelError("Libelle", "Libelle il already in use");
-        //                return BadRequest(ModelState);
-        //            }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Code", "Code Paie il already in use");
+                        return BadRequest(ModelState);
+                    }
 
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, "Error Creating Type Prime");
-        //    }
-        //}
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Creating Type Prime");
+            }
+        }
 
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<TypePaie>> Update(int id, TypePaie objet)
+        public async Task<ActionResult<TypePaies>> Update(int id, TypePaies objet)
         {
 
             try
             {
 
-                if (id != objet.Id)
+                if (id != objet.TypePaiesId)
                     return BadRequest("Type Prime ID mismatch");
-                var organigrammeToUpdate = await typePaieRepository.GetById(id);
-                if (organigrammeToUpdate == null)
+                var objetToUpdate = await typePaieRepository.GetById(id);
+                if (objetToUpdate == null)
                     return NotFound($"type Prime with id ={id} not Found");
                 return await typePaieRepository.Update(objet);
             }
@@ -111,7 +109,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<TypePaie>> Delete(int id)
+        public async Task<ActionResult<TypePaies>> Delete(int id)
         {
             try
             {

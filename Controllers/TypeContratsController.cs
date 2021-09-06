@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Models.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Models.Repository;
-using Models;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -71,7 +71,7 @@ namespace API.Controllers
                     {
 
                         var created = await repository.Add(obj);
-                        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+                        return CreatedAtAction(nameof(GetById), new { id = created.TypeContratId }, created);
 
                     }
                     else
@@ -96,7 +96,7 @@ namespace API.Controllers
             try
             {
 
-                if (id != objet.Id)
+                if (id != objet.TypeContratId)
                     return BadRequest("Type Prime ID mismatch");
                 var objetToUpdate = await repository.GetById(id);
                 if (objetToUpdate == null)

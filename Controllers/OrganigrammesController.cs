@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Models.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Models.Repository;
-using Models;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -13,10 +13,10 @@ namespace API.Controllers
     public class OrganigrammesController : ControllerBase
     {
         private readonly IOrganigrammeRepository organigrammeRepository;
-         
+
         public OrganigrammesController(IOrganigrammeRepository organigrammeRepository)
         {
-           
+
             this.organigrammeRepository = organigrammeRepository;
         }
 
@@ -69,9 +69,9 @@ namespace API.Controllers
                     var org = await organigrammeRepository.GetOrganigrammeByLibelle(organigramme.Libelle);
                     if (org == null)
                     {
-                       
+
                         var CreatedOrganigramme = await organigrammeRepository.AddOrganigramme(organigramme);
-                        return CreatedAtAction(nameof(GetOrganigramme), new { id = CreatedOrganigramme.Id }, CreatedOrganigramme);
+                        return CreatedAtAction(nameof(GetOrganigramme), new { id = CreatedOrganigramme.OrganigrammeId }, CreatedOrganigramme);
 
                     }
                     else
@@ -96,7 +96,7 @@ namespace API.Controllers
             try
             {
 
-                if (id != organigramme.Id)
+                if (id != organigramme.OrganigrammeId)
                     return BadRequest("Employee ID mismatch");
                 var organigrammeToUpdate = await organigrammeRepository.GetOrganigramme(id);
                 if (organigrammeToUpdate == null)
@@ -152,8 +152,8 @@ namespace API.Controllers
 
 
         }
-      
 
-        
+
+
     }
 }

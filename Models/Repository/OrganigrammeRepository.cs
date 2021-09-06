@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models;
 namespace API.Models.Repository
 {
     public class OrganigrammeRepository : IOrganigrammeRepository
@@ -25,7 +25,7 @@ namespace API.Models.Repository
 
         public async Task<Organigramme> DeleteOrganigramme(int Id)
         {
-            var result = await appDbContext.Organigrammes.FirstOrDefaultAsync(e => e.Id == Id);
+            var result = await appDbContext.Organigrammes.FirstOrDefaultAsync(e => e.OrganigrammeId == Id);
             if (result != null)
             {
 
@@ -40,7 +40,7 @@ namespace API.Models.Repository
         public async Task<Organigramme> GetOrganigramme(int Id)
         {
 
-            return await appDbContext.Organigrammes.FirstOrDefaultAsync(e => e.Id == Id);
+            return await appDbContext.Organigrammes.FirstOrDefaultAsync(e => e.OrganigrammeId == Id);
         }
 
         public async Task<Organigramme> GetOrganigrammeByLibelle(string Libelle)
@@ -57,19 +57,19 @@ namespace API.Models.Repository
         public async Task<Organigramme> UpdateOrganigramme(Organigramme organigramme)
         {
 
-            var result = await GetOrganigramme(organigramme.Id);
+            var result = await GetOrganigramme(organigramme.OrganigrammeId);
             //await appDbContext.Organigrammes.Include(e => e.Departement).FirstOrDefaultAsync(e => e.OrganigrammeId == employe.OrganigrammeId);
             if (result != null)
             {
                 if (result != organigramme)
                 {
-                    result.Id = organigramme.Id;
+                    result.OrganigrammeId = organigramme.OrganigrammeId;
 
                     result.Code = organigramme.Code;
 
                     result.Libelle = organigramme.Libelle;
 
-                    
+
                     await appDbContext.SaveChangesAsync();
                     return result;
                 }
@@ -79,7 +79,7 @@ namespace API.Models.Repository
         }
 
 
-        public async Task<IEnumerable<Organigramme>> Search(String name )
+        public async Task<IEnumerable<Organigramme>> Search(String name)
         {
 
             IQueryable<Organigramme> query = appDbContext.Organigrammes;
@@ -88,11 +88,11 @@ namespace API.Models.Repository
 
                 query = query.Where(e => e.Libelle.Contains(name) || e.Libelle.Contains(name));
             }
-            
+
             return await query.ToListAsync();
         }
 
-     
+
 
     }
 }

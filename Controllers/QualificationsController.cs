@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Models.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Models.Repository;
-using Models;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -71,7 +71,7 @@ namespace API.Controllers
                     {
 
                         var CreatedQualification = await qualificationRepository.Add(qualification);
-                        return CreatedAtAction(nameof(GetById), new { id = CreatedQualification.Id }, CreatedQualification);
+                        return CreatedAtAction(nameof(GetById), new { id = CreatedQualification.QualificationId }, CreatedQualification);
 
                     }
                     else
@@ -96,7 +96,7 @@ namespace API.Controllers
             try
             {
 
-                if (id != qualification.Id)
+                if (id != qualification.QualificationId)
                     return BadRequest("Qualification ID mismatch");
                 var qualificationToUpdate = await qualificationRepository.GetById(id);
                 if (qualificationToUpdate == null)

@@ -1,15 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Models;
 namespace API.Models.Repository
 {
-#pragma warning disable CS0535 // 'QualificationRepository' n'implémente pas le membre d'interface 'IQualificationRepository.Delete(int)'
-    public class QualificationRepository : IQualificationRepository
-#pragma warning restore CS0535 // 'QualificationRepository' n'implémente pas le membre d'interface 'IQualificationRepository.Delete(int)'
-    {
+     public class QualificationRepository : IQualificationRepository
+     {
         private readonly AppDbContext appDbContext;
 
         public QualificationRepository(AppDbContext appDbContext)
@@ -27,7 +25,7 @@ namespace API.Models.Repository
 
         public async Task<Qualification> Delete(int id)
         {
-            var result = await appDbContext.Qualifications.FirstOrDefaultAsync(e => e.Id == id);
+            var result = await appDbContext.Qualifications.FirstOrDefaultAsync(e => e.QualificationId == id);
             if (result != null)
             {
 
@@ -42,7 +40,7 @@ namespace API.Models.Repository
         public async Task<Qualification> GetById(int Id)
         {
 
-            return await appDbContext.Qualifications.FirstOrDefaultAsync(e => e.Id == Id);
+            return await appDbContext.Qualifications.FirstOrDefaultAsync(e => e.QualificationId == Id);
         }
 
         public async Task<Qualification> GetByCriteria(string Libelle)
@@ -59,13 +57,13 @@ namespace API.Models.Repository
         public async Task<Qualification> Update(Qualification qualification)
         {
 
-            var result = await GetById(qualification.Id);
+            var result = await GetById(qualification.QualificationId);
             //await appDbContext.Qualifications.Include(e => e.Departement).FirstOrDefaultAsync(e => e.QualificationId == employe.QualificationId);
             if (result != null)
             {
                 if (result != qualification)
                 {
-                    result.Id = qualification.Id;
+                    result.QualificationId = qualification.QualificationId;
 
                     result.CodeQualification = qualification.CodeQualification;
 

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Models.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Models.Repository;
-using Models;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -13,10 +13,10 @@ namespace API.Controllers
     public class TypePrimesController : ControllerBase
     {
         private readonly ITypePrimeRepository typePrimeRepository;
-         
+
         public TypePrimesController(ITypePrimeRepository typePrimeRepository)
         {
-           
+
             this.typePrimeRepository = typePrimeRepository;
         }
 
@@ -69,9 +69,9 @@ namespace API.Controllers
                     var org = await typePrimeRepository.GetByCriteria(typePrime.Libelle);
                     if (org == null)
                     {
-                       
+
                         var created = await typePrimeRepository.Add(typePrime);
-                        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+                        return CreatedAtAction(nameof(GetById), new { id = created.TypePrimeId }, created);
 
                     }
                     else
@@ -96,7 +96,7 @@ namespace API.Controllers
             try
             {
 
-                if (id != objet.Id)
+                if (id != objet.TypePrimeId)
                     return BadRequest("Type Prime ID mismatch");
                 var organigrammeToUpdate = await typePrimeRepository.GetById(id);
                 if (organigrammeToUpdate == null)
@@ -152,8 +152,8 @@ namespace API.Controllers
 
 
         }
-      
 
-        
+
+
     }
 }

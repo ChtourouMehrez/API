@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Models;
 
 namespace API.Models.Repository
 {
@@ -15,6 +13,6 @@ namespace API.Models.Repository
         public Task<Qualification> Delete(int Id);
         public Task<Qualification> GetByCriteria(string Criteria);
         public Task<IEnumerable<Qualification>> Search(string Criteria);
-         
+
     }
 }
