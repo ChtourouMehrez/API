@@ -1,0 +1,76 @@
+[33mcommit dda3adf97fbf3bd2bbf7f01d2f04b7489c52accb[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Tue Sep 7 02:30:27 2021 +0100
+
+    Synchronastion
+
+[33mcommit 63965e10beeadff4ace8edebd0df2a8e5b791fb8[m
+Merge: 8aff922 a99b4f0
+Author: Mehrez chtourou <60312209+ChtourouMehrez@users.noreply.github.com>
+Date:   Mon Sep 6 01:07:03 2021 +0100
+
+    Merge pull request #1 from ChtourouMehrez/ProjectModels
+    
+    Personnel session PrimePersonnel,ChargePatronale
+
+[33mcommit a99b4f02975736ae5994c26b3cec8c57504a4561[m[33m ([m[1;31morigin/ProjectModels[m[33m, [m[1;32mProjectModels[m[33m)[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Mon Sep 6 00:59:51 2021 +0100
+
+    Personnel session PrimePersonnel,ChargePatronale
+
+[33mcommit 8aff922220574b3eb4bb5f5a604976861bd86d1a[m
+Author: Mehrez chtourou <60312209+ChtourouMehrez@users.noreply.github.com>
+Date:   Thu Aug 5 23:39:54 2021 +0100
+
+    Add files via upload
+    
+    Add Project Models
+
+[33mcommit 6cfe5830a0416fd527a907e9bd9712abf16ff7cd[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Thu Aug 5 23:35:38 2021 +0100
+
+    az
+
+[33mcommit 5066ae8f7deb2fe3a310394fe7bbe2cecb6aee26[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Thu Aug 5 23:25:05 2021 +0100
+
+    Ajouter les Models
+
+[33mcommit 7cf0f17e73d3ca00eb7b8ad4a62065fc9e8259c8[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Thu Aug 5 23:21:31 2021 +0100
+
+    add Heure
+
+[33mcommit 7431c2411e745a13c141429ad321381e374fa575[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Thu Aug 5 18:34:25 2021 +0100
+
+    z
+
+[33mcommit 0f4de53061b1f65e7baa02ecd8345d2a3c4587d0[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Thu Aug 5 18:30:13 2021 +0100
+
+    second
+
+[33mcommit 693f8b6d70dddcecb775d2bba1cb0b64e65c65c1[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Thu Aug 5 18:26:35 2021 +0100
+
+    First commit on azure
+
+[33mcommit 43a1332c16dd305677d267d8e6fd8f055972c594[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Thu Aug 5 17:38:30 2021 +0100
+
+    Ajoutez des fichiers projet.
+
+[33mcommit c77437c42107cf65ae9b653974d37a30a991ccf1[m
+Author: mehrez chtourou <mehrez-chtourou@outlook.fr>
+Date:   Thu Aug 5 17:38:17 2021 +0100
+
+    Ajoutez les fichiers .gitignore et .gitattributes.
