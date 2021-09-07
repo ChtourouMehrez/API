@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Models;
 namespace API.Models.Repository
 {
-     public class QualificationRepository : IQualificationRepository
-     {
+#pragma warning disable CS0535 // 'QualificationRepository' n'implémente pas le membre d'interface 'IQualificationRepository.Delete(int)'
+    public class QualificationRepository : IQualificationRepository
+#pragma warning restore CS0535 // 'QualificationRepository' n'implémente pas le membre d'interface 'IQualificationRepository.Delete(int)'
+    {
         private readonly AppDbContext appDbContext;
 
         public QualificationRepository(AppDbContext appDbContext)

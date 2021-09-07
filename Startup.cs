@@ -1,11 +1,18 @@
-using API.Models.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using API.Models.Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace API
 {
@@ -30,28 +37,27 @@ namespace API
             });
 
             #region **** Injection Service Repository
-            services.AddScoped<IOrganigrammeRepository, OrganigrammeRepository>();
-            services.AddScoped<IQualificationRepository, QualificationRepository>();
-            services.AddScoped<ITypePrimeRepository, TypePrimeRepository>();
-            services.AddScoped<ITypePaiesRepository, TypePaiesRepository>(); 
-            services.AddScoped<ITypeContratRepository, TypeContratRepository>();
-             services.AddScoped<ICategorieRepository, CategorieRepository>();
-            services.AddScoped<IRegimeRepository, RegimeRepository>();
-            services.AddScoped<IEchelonRepository, EchelonRepository>();
- 
-            services.AddScoped<ICongeRepository, CongeRepository>();
-            services.AddScoped<IServiceDepartementRepository, ServiceDepartementRepository>();
-            services.AddScoped<IJoursFerieRepository, JoursFerieRepository>();
-            services.AddScoped<IGrilleRepository, GrilleRepository>();
-            services.AddScoped<INatureRepository, NatureRepository>();
-            services.AddScoped<ITypeCNSSRepository, TypeCNSSRepository>();
-            services.AddScoped<IModeReglementRepository, ModeReglementRepository>();
-            services.AddScoped<IBanqueRepository, BanqueRepository>(); 
+            services.AddScoped<IBanqueRepository, BanqueRepository>();
+            services.AddScoped<ICategorieRepository, CategorieRepository>();
             services.AddScoped<IChargePatronaleRepository, ChargePatronaleRepository>();
-            services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<ICongeRepository, CongeRepository>();
+            services.AddScoped<IEchelonRepository, EchelonRepository>();
+            services.AddScoped<IGrilleRepository, GrilleRepository>();
+            services.AddScoped<IJoursFerieRepository, JoursFerieRepository>();
+            services.AddScoped<IModeReglementRepository, ModeReglementRepository>();
+            services.AddScoped<INatureRepository, NatureRepository>();
+            services.AddScoped<IOrganigrammeRepository, OrganigrammeRepository>();
             services.AddScoped<IPersonnelRepository, PersonnelRepository>();
-
             services.AddScoped<IPrimePersonnelRepository, PrimePersonnelRepository>();
+            services.AddScoped<IQualificationRepository, QualificationRepository>();
+            services.AddScoped<IRegimeRepository, RegimeRepository>();
+            services.AddScoped<IServiceDepartementRepository, ServiceDepartementRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<ITypeCNSSRepository, TypeCNSSRepository>(); 
+            services.AddScoped<ITypeContratRepository, TypeContratRepository>();
+            services.AddScoped<ITypePaiesRepository, TypePaiesRepository>();
+            services.AddScoped<ITypePrimeRepository, TypePrimeRepository>();
+
 
 
             #endregion

@@ -5,7 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Departement.cs" />
+    <Compile Remove="EditEmployeeModel.cs" />
+    <Compile Remove="EmailDomainValidator.cs" />
+    <Compile Remove="Employee.cs" />
+    <Compile Remove="EmployeeProfile.cs" />
+    <Compile Remove="HeureSupplementaire.cs" />
     <Compile Remove="Models\IRepository\IHeureSuplementaireRepository.cs" />
+    <Compile Remove="Organigramme.cs" />
+    <Compile Remove="Qualification.cs" />
+    <Compile Remove="TypeContrat.cs" />
+    <Compile Remove="TypePaie.cs" />
+    <Compile Remove="TypePrime.cs" />
   </ItemGroup>
 
   <ItemGroup>
