@@ -63,6 +63,7 @@ namespace API.Models.Repository
                 {
                     result.TypePaiesId = obj.TypePaiesId;
                     result.CodePaie = obj.CodePaie;
+                    result.Libelle = obj.Libelle;
                     result.Declarer = obj.Declarer;
                     result.PECPrime = obj.PECPrime;
                     result.PECNote = obj.PECNote;
