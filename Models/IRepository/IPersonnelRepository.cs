@@ -14,7 +14,7 @@ namespace API.Models.Repository
         public Task<Personnel> Update(Personnel obj);
         public Task<Personnel> Delete(int Id);
         public Task<Personnel> GetByCriteria(string Criteria);
-        //public Task<IEnumerable<TypePaie>> Search(string Criteria);
+        public Task<IEnumerable<Personnel>> Search(string Criteria);
 
     }
 }

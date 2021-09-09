@@ -11,9 +11,10 @@ namespace API.Controllers
     public class SessionsController : ControllerBase
     {
         private readonly ISessionRepository SessionRepository;
-
-        public SessionsController(ISessionRepository SessionRepository)
+        private readonly ITypePaiesRepository TypePaiesRepository;
+        public SessionsController(ISessionRepository SessionRepository, ITypePaiesRepository TypePaiesRepository)
         {
+            this.TypePaiesRepository = TypePaiesRepository;
 
             this.SessionRepository = SessionRepository;
         }
@@ -51,30 +52,36 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Session>> Create([FromBody] Session objet)
+        public async Task<ActionResult<Session>> Create([FromBody] Session obj)
         {
             try
             {
 
                 if
-                (objet == null)
+                (obj == null)
                 {
                     return BadRequest();
 
                 }
                 else
                 {
-                    var obj = await SessionRepository.GetById(objet.SessionKey);
-                    if (obj == null)
+                    var org = await SessionRepository.GetById(obj.SessionKey);
+                    if (org == null)
                     {
+                        //obj.Regime = new Regime();
+                        //obj.Categorie = new Categorie();
+                        //obj.Echelon = new Echelon();
 
-                        var created = await SessionRepository.Add(objet);
+                       
+                        obj.TypePaies = await TypePaiesRepository.GetById(obj.TypePaiesId);
+
+                        var created = await SessionRepository.Add(obj);
                         return CreatedAtAction(nameof(GetById), new { id = created.SessionKey }, created);
 
                     }
                     else
                     {
-                        ModelState.AddModelError("ID", "Id Session il already in use");
+                        ModelState.AddModelError("Id", "Id il already in use");
                         return BadRequest(ModelState);
                     }
 
@@ -82,7 +89,7 @@ namespace API.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error Creating Session");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Creating Grilles ");
             }
         }
 

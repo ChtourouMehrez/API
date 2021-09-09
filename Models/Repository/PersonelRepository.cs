@@ -59,7 +59,7 @@ namespace API.Models.Repository
         }
         public async Task<IEnumerable<Session>> GetALLSessionByPersonnelKey(int PersonnelKey)
         {
-            return await appDbContext.Sessions.Include(e => e.PersonnelParSession).Where(e => e.SessionKey == PersonnelKey).ToListAsync();
+            return await appDbContext.Sessions.Where(e => e.SessionKey == PersonnelKey).ToListAsync();
         }
         public async Task<IEnumerable<PrimePersonnel>> GetALLPrimePersonnelByPersonnelKey(int PersonnelKey)
         {

@@ -17,6 +17,7 @@ namespace API.Models.Repository
 
         public async Task<Session> Add(Session Obj)
         {
+            Obj.DateCloture = Convert.ToDateTime("31/01/2018");
             var result = await appDbContext.Sessions.AddAsync(Obj);
 
             await appDbContext.SaveChangesAsync();
@@ -51,7 +52,7 @@ namespace API.Models.Repository
 
         public async Task<IEnumerable<Session>> GetALL()
         {
-            return await appDbContext.Sessions.Include(e=>e.PersonnelParSession).ToListAsync();
+            return await appDbContext.Sessions.Include(e => e.TypePaies).ToListAsync();
         }
         public async Task<IEnumerable<Personnel>> GetALLPersonnelBySessionId(int SessionKey)
         {
@@ -83,7 +84,7 @@ namespace API.Models.Repository
                     result.DateOuverture = obj.DateOuverture;
                     result.Exercice = obj.Exercice;
                     result.MoisSession = obj.MoisSession;
-                    result.PersonnelParSession = obj.PersonnelParSession;
+
                     result.Trimestre = obj.Trimestre;
                     result.TypePaies = obj.TypePaies;
                     result.TypePaiesId = obj.TypePaiesId;
