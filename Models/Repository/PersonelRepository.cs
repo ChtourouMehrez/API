@@ -55,7 +55,7 @@ namespace API.Models.Repository
 
         public async Task<IEnumerable<Personnel>> GetALL()
         {
-            return await appDbContext.Personnels.ToListAsync();
+            return await appDbContext.Personnels.Include(e => e.Categorie).Include(e => e.Session).Include(e => e.ChargePatronale).Include(e => e.Echelon).Include(e => e.Organigramme).Include(e => e.Qualification).Include(e => e.Regime).Include(e => e.TypeContrat).ToListAsync();
         }
         public async Task<IEnumerable<Session>> GetALLSessionByPersonnelKey(int PersonnelKey)
         {
@@ -84,6 +84,8 @@ namespace API.Models.Repository
 
                     result.Categorie = objs.Categorie;
                     result.CategorieId = objs.CategorieId;
+                    result.Photo = objs.Photo;
+                    result.Session = objs.Session;
 
                     result.CCB = objs.CCB;
 
@@ -123,10 +125,7 @@ namespace API.Models.Repository
                     result.ModeReglement = objs.ModeReglement;
                     result.ModeReglementId = objs.ModeReglementId;
                     result.Nationalite = objs.Nationalite;
-                    result.Nature = objs.Nature;
 
-
-                    result.NatureId = objs.NatureId;
                     result.NbreParentAcharge = objs.NbreParentAcharge;
                     result.Nom = objs.Nom;
 
@@ -134,7 +133,7 @@ namespace API.Models.Repository
 
                     result.NonRegle = objs.NonRegle;
                     result.NumeroCNSS = objs.NumeroCNSS;
-                    result.NumeroSession = objs.NumeroSession;
+
                     result.Observation = objs.Observation;
 
                     result.Organigramme = objs.Organigramme;
@@ -156,7 +155,7 @@ namespace API.Models.Repository
 
 
                     result.SessionKey = objs.SessionKey;
-                    result.sexe = objs.sexe;
+                    result.Sexe = objs.Sexe;
                     result.SoumisImpot = objs.SoumisImpot;
                     result.STC = objs.STC;
                     result.TypeContrat = objs.TypeContrat;
@@ -164,7 +163,10 @@ namespace API.Models.Repository
                     result.NumeroTel = objs.NumeroTel;
 
                     result.Email = objs.Email;
-                    result.PrimePersonnels = objs.PrimePersonnels;
+                    
+
+
+                    //result.PrimePersonnels = objs.PrimePersonnels;
                     await appDbContext.SaveChangesAsync();
                     return result;
                 }
@@ -189,7 +191,7 @@ namespace API.Models.Repository
 
         public async Task<Personnel> GetByCriteria(string Libelle)
         {
-            return await appDbContext.Personnels.FirstOrDefaultAsync(e => e.NomPrenom == Libelle);
+            return await appDbContext.Personnels.Include(e => e.Categorie).Include(e => e.Session).Include(e => e.ChargePatronale).Include(e => e.Echelon).Include(e => e.Organigramme).Include(e => e.Qualification).Include(e => e.Regime).Include(e => e.TypeContrat).FirstOrDefaultAsync(e => e.NomPrenom.Equals(Libelle));
 
         }
 

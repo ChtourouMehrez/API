@@ -4,14 +4,16 @@ using API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210916181402_gRILLEaa")]
+    partial class gRILLEaa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -749,13 +751,11 @@ namespace API.Migrations
                 {
                     b.HasOne("Models.Session", "Session")
                         .WithMany()
-                        .HasForeignKey("SessionKey1")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("SessionKey1");
 
                     b.HasOne("Models.Personnel", "Personnel")
                         .WithMany()
-                        .HasForeignKey("PersonnelKey1", "PersonnelSessionKey")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("PersonnelKey1", "PersonnelSessionKey");
 
                     b.Navigation("Personnel");
 
@@ -767,19 +767,19 @@ namespace API.Migrations
                     b.HasOne("Models.Categorie", "Categorie")
                         .WithMany()
                         .HasForeignKey("CategorieId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Echelon", "Echelon")
                         .WithMany()
                         .HasForeignKey("EchelonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Qualification", "Qualification")
                         .WithMany()
                         .HasForeignKey("QualificationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Categorie");
@@ -794,55 +794,55 @@ namespace API.Migrations
                     b.HasOne("Models.Categorie", "Categorie")
                         .WithMany()
                         .HasForeignKey("CategorieId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.ChargePatronale", "ChargePatronale")
                         .WithMany()
                         .HasForeignKey("ChargePatronaleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Echelon", "Echelon")
                         .WithMany()
                         .HasForeignKey("EchelonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.ModeReglement", "ModeReglement")
                         .WithMany()
                         .HasForeignKey("ModeReglementId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Organigramme", "Organigramme")
                         .WithMany()
                         .HasForeignKey("OrganigrammeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Qualification", "Qualification")
                         .WithMany()
                         .HasForeignKey("QualificationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Regime", "Regime")
                         .WithMany()
                         .HasForeignKey("RegimeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Session", "Session")
                         .WithMany()
                         .HasForeignKey("SessionKey")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.TypeContrat", "TypeContrat")
                         .WithMany()
                         .HasForeignKey("TypeContratId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Categorie");
@@ -869,13 +869,12 @@ namespace API.Migrations
                     b.HasOne("Models.TypePrime", "TypePrime")
                         .WithMany()
                         .HasForeignKey("TypePrimeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Personnel", "Personnel")
                         .WithMany()
-                        .HasForeignKey("PersonnelKey1", "PersonnelSessionKey")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("PersonnelKey1", "PersonnelSessionKey");
 
                     b.Navigation("Personnel");
 
@@ -887,7 +886,7 @@ namespace API.Migrations
                     b.HasOne("Models.TypePaies", "TypePaies")
                         .WithMany()
                         .HasForeignKey("TypePaiesId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("TypePaies");

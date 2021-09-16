@@ -45,7 +45,7 @@ namespace API.Models.Repository
 
         public async Task<Grille> GetByCriteria(string Libelle)
         {
-            return await appDbContext.Grilles.FirstOrDefaultAsync(e => e.RegimeId == 1);
+            return await appDbContext.Grilles.FirstOrDefaultAsync(e => e.QualificationId == 1);
 
         }
 
@@ -53,9 +53,7 @@ namespace API.Models.Repository
         {
 
 
-            return await appDbContext.Grilles.ToListAsync();
-
-            //var Grilles= appDbContext.Grilles.Include(Gechelon => Gechelon.CategorieId).ThenInclude(e => e.CategorieSuivantId).ToListAsync();
+            return await   appDbContext.Grilles.Include(e => e.Echelon).Include(e => e.Categorie).Include(e => e.Qualification).ToListAsync();
 
         }
 
@@ -75,7 +73,7 @@ namespace API.Models.Repository
 
                     result.CategorieId = obj.CategorieId;
 
-                    result.RegimeId = obj.RegimeId;
+                    result.QualificationId = obj.QualificationId;
                     result.Salaire = obj.Salaire;
                     result.NbreMoisAnciente = obj.NbreMoisAnciente;
 

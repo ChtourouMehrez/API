@@ -4,14 +4,16 @@ using API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210910001518_Personnelss")]
+    partial class Personnelss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,55 +156,6 @@ namespace API.Migrations
                     b.ToTable("Echelons");
                 });
 
-            modelBuilder.Entity("Models.EnfantPersonnel", b =>
-                {
-                    b.Property<int>("EnfantPersonnelId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateNaissance")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("EnCharge")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("EtudiantNonBoursier")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Hendicape")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NomPrenom")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PersonnelKey")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PersonnelKey1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PersonnelSessionKey")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SessionKey")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SessionKey1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Situation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EnfantPersonnelId");
-
-                    b.HasIndex("SessionKey1");
-
-                    b.HasIndex("PersonnelKey1", "PersonnelSessionKey");
-
-                    b.ToTable("EnfantPersonnels");
-                });
-
             modelBuilder.Entity("Models.Grille", b =>
                 {
                     b.Property<int>("GrilleId")
@@ -222,7 +175,7 @@ namespace API.Migrations
                     b.Property<int>("NbreMoisAnciente")
                         .HasColumnType("int");
 
-                    b.Property<int>("QualificationId")
+                    b.Property<int>("RegimeId")
                         .HasColumnType("int");
 
                     b.Property<int>("Salaire")
@@ -234,7 +187,7 @@ namespace API.Migrations
 
                     b.HasIndex("EchelonId");
 
-                    b.HasIndex("QualificationId");
+                    b.HasIndex("RegimeId");
 
                     b.ToTable("Grilles");
                 });
@@ -355,8 +308,8 @@ namespace API.Migrations
                     b.Property<bool>("ChefFamille")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("CoefConge")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("CoefConge")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ComplementSalaire")
                         .HasColumnType("decimal(18,3)");
@@ -415,6 +368,9 @@ namespace API.Migrations
                     b.Property<string>("Nationalite")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("NatureId")
+                        .HasColumnType("int");
+
                     b.Property<int>("NbreParentAcharge")
                         .HasColumnType("int");
 
@@ -457,14 +413,14 @@ namespace API.Migrations
                     b.Property<decimal>("SalaireBase")
                         .HasColumnType("decimal(18,3)");
 
-                    b.Property<string>("Sexe")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("SoumisImpot")
                         .HasColumnType("bit");
 
                     b.Property<int>("TypeContratId")
                         .HasColumnType("int");
+
+                    b.Property<string>("sexe")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PersonnelKey", "SessionKey");
 
@@ -475,6 +431,8 @@ namespace API.Migrations
                     b.HasIndex("EchelonId");
 
                     b.HasIndex("ModeReglementId");
+
+                    b.HasIndex("NatureId");
 
                     b.HasIndex("OrganigrammeId");
 
@@ -745,48 +703,31 @@ namespace API.Migrations
                     b.ToTable("TypePrimes");
                 });
 
-            modelBuilder.Entity("Models.EnfantPersonnel", b =>
-                {
-                    b.HasOne("Models.Session", "Session")
-                        .WithMany()
-                        .HasForeignKey("SessionKey1")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Models.Personnel", "Personnel")
-                        .WithMany()
-                        .HasForeignKey("PersonnelKey1", "PersonnelSessionKey")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Personnel");
-
-                    b.Navigation("Session");
-                });
-
             modelBuilder.Entity("Models.Grille", b =>
                 {
                     b.HasOne("Models.Categorie", "Categorie")
                         .WithMany()
                         .HasForeignKey("CategorieId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Echelon", "Echelon")
                         .WithMany()
                         .HasForeignKey("EchelonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.Qualification", "Qualification")
+                    b.HasOne("Models.Regime", "Regime")
                         .WithMany()
-                        .HasForeignKey("QualificationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("RegimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Categorie");
 
                     b.Navigation("Echelon");
 
-                    b.Navigation("Qualification");
+                    b.Navigation("Regime");
                 });
 
             modelBuilder.Entity("Models.Personnel", b =>
@@ -794,55 +735,61 @@ namespace API.Migrations
                     b.HasOne("Models.Categorie", "Categorie")
                         .WithMany()
                         .HasForeignKey("CategorieId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.ChargePatronale", "ChargePatronale")
                         .WithMany()
                         .HasForeignKey("ChargePatronaleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Echelon", "Echelon")
                         .WithMany()
                         .HasForeignKey("EchelonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.ModeReglement", "ModeReglement")
                         .WithMany()
                         .HasForeignKey("ModeReglementId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Nature", "Nature")
+                        .WithMany()
+                        .HasForeignKey("NatureId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Organigramme", "Organigramme")
                         .WithMany()
                         .HasForeignKey("OrganigrammeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Qualification", "Qualification")
                         .WithMany()
                         .HasForeignKey("QualificationId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Regime", "Regime")
                         .WithMany()
                         .HasForeignKey("RegimeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Session", "Session")
                         .WithMany()
                         .HasForeignKey("SessionKey")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.TypeContrat", "TypeContrat")
                         .WithMany()
                         .HasForeignKey("TypeContratId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Categorie");
@@ -852,6 +799,8 @@ namespace API.Migrations
                     b.Navigation("Echelon");
 
                     b.Navigation("ModeReglement");
+
+                    b.Navigation("Nature");
 
                     b.Navigation("Organigramme");
 
@@ -869,13 +818,12 @@ namespace API.Migrations
                     b.HasOne("Models.TypePrime", "TypePrime")
                         .WithMany()
                         .HasForeignKey("TypePrimeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Personnel", "Personnel")
                         .WithMany()
-                        .HasForeignKey("PersonnelKey1", "PersonnelSessionKey")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("PersonnelKey1", "PersonnelSessionKey");
 
                     b.Navigation("Personnel");
 
@@ -887,7 +835,7 @@ namespace API.Migrations
                     b.HasOne("Models.TypePaies", "TypePaies")
                         .WithMany()
                         .HasForeignKey("TypePaiesId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("TypePaies");

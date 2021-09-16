@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
+using System.Linq;
+
 namespace API
 {
     public class AppDbContext : DbContext
@@ -16,7 +18,14 @@ namespace API
 
             // Code to seed data
             //more PRIMARY kEY THAN One
-            modelBuilder.Entity<Personnel>().HasKey(X => new { X.PersonnelKey, X.SessionKey });
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Personnel>().HasKey(X => new { X.PersonnelKey, X.SessionKey});
+
         }
 
         public DbSet<Organigramme> Organigrammes { get; set; }
@@ -52,8 +61,13 @@ namespace API
 
         public DbSet<PrimePersonnel> PrimePersonnels { get; set; }
 
+        public DbSet<EnfantPersonnel> EnfantPersonnels { get; set; }
+        public DbSet<Utilisateur> Utilisateurs { get; set; }
 
         
+
+
+
 
     }
 }

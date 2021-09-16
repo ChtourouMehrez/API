@@ -66,6 +66,7 @@ namespace API.Controllers
                 }
                 else
                 {
+
                     var org = await repository.GetByCriteria(obj.NomPrenom);
                     if (org == null)
                     {

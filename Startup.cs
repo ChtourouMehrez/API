@@ -58,8 +58,9 @@ namespace API
             services.AddScoped<ITypePaiesRepository, TypePaiesRepository>();
             services.AddScoped<ITypePrimeRepository, TypePrimeRepository>();
 
+            services.AddScoped<IEnfantPersonnelRepository, EnfantPersonnelRepository>();
 
-
+            services.AddScoped<IUtilisateurRepository, UtilisateurRepository>();
             #endregion
         }
 

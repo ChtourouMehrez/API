@@ -13,13 +13,13 @@ namespace API.Controllers
     public class GrillesController : ControllerBase
     {
         private readonly IGrilleRepository repository;
-        private readonly IRegimeRepository repositoryRegime;
+        private readonly IQualificationRepository repositoryQualification;
         private readonly ICategorieRepository repositoryCategorie;
         private readonly IEchelonRepository repositoryEchelon;
-        public GrillesController(IGrilleRepository repository, ICategorieRepository repositoryCategorie, IRegimeRepository repositoryRegime, IEchelonRepository repositoryEchelon)
+        public GrillesController(IGrilleRepository repository, ICategorieRepository repositoryCategorie, IQualificationRepository repositoryQualification, IEchelonRepository repositoryEchelon)
         {
             this.repositoryCategorie = repositoryCategorie;
-            this.repositoryRegime = repositoryRegime;
+            this.repositoryQualification = repositoryQualification;
             this.repositoryEchelon = repositoryEchelon;
 
             this.repository = repository;
@@ -74,11 +74,11 @@ namespace API.Controllers
                     var org = await repository.GetById(obj.GrilleId);
                     if (org == null)
                     {
-                        //obj.Regime = new Regime();
+                        //obj.Qualification = new Qualification();
                         //obj.Categorie = new Categorie();
                         //obj.Echelon = new Echelon();
 
-                        obj.Regime = await repositoryRegime.GetById(obj.RegimeId);
+                        obj.Qualification = await repositoryQualification.GetById(obj.QualificationId);
                         obj.Categorie = await repositoryCategorie.GetById(obj.CategorieId);
                         obj.Echelon = await repositoryEchelon.GetById(obj.EchelonId);
 
