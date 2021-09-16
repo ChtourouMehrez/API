@@ -100,7 +100,7 @@ namespace API.Models.Repository
             if (!string.IsNullOrEmpty(name))
             {
 
-                query = query.Where(e => e.RaisonSociale.Contains(name) || e.Adresse.Contains(name) || e.Tel.ToString().Contains(name) || e.Paye.Contains(name) || e.CodePostal.ToString().Contains(name) || e.Siege.Contains(name) || e.Ville.Contains(name));
+                query = query.Where(e => e.NomUtilisateur.Contains(name)  );
             }
 
             return await query.ToListAsync();
@@ -108,7 +108,7 @@ namespace API.Models.Repository
 
         public async Task<Utilisateur> GetByCriteria(string Libelle)
         {
-            return await appDbContext.Utilisateurs.FirstOrDefaultAsync(e => e.RaisonSociale == Libelle);
+            return await appDbContext.Utilisateurs.FirstOrDefaultAsync(e => e.NomUtilisateur == Libelle);
 
         }
 
